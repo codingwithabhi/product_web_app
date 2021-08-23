@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>Product Web App</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+<div class="row">
+ <h2 align="middle">Product List</h2>
+  
+    <div class="col-sm-8">
+   
+     
+  <table class="table table-hover" style="margin-top:10px">
+    <thead>
+      <tr>
+        <th><a href="{% url 'product-list' %}?sort_by={{sort_order}}name" data-toggle="tooltip" title="Sort by Name">Name</a></th>
+        <th><a href="{% url 'product-list' %}?sort_by={{sort_order}}price" data-toggle="tooltip" title="Sort by Price">Price</a></th>
+        <th><a href="{% url 'product-list' %}?sort_by={{sort_order}}description" data-toggle="tooltip" title="Sort by Description">Description</a></th>
+        <th><a href="{% url 'product-list' %}?sort_by={{sort_order}}text" data-toggle="tooltip" title="Sort by Text">Text</a></th>
+        <th><a href="{% url 'product-list' %}?sort_by={{sort_order}}rating" data-toggle="tooltip" title="Sort by Rating">Rating</a></th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for product in product_list %}
+      <tr>
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.text}}</td>
+        <td>{{product.rating}}</td>
+        <td><img src="{{ product.image.url }}" class="img-rounded" height="50" alt="img"></td>
+        
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+    </div>
+    <div class="col-sm-4">
+     <div class="row">
+        
+        <div class="col-sm-8">
+        <form action="{% url 'product-list' %}">
+
+        
+            <label for="sel1">Rating:</label>
+            <select class="form-control" id="rating" name="rating">
+                <option>Select Rating</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+
+        
+            <div class="form-group">
+                <label for="min_price">Min Price:</label>
+                <input type="number" class="form-control" id="min_price" name="min_price">
+            </div>
+            <div class="form-group">
+                <label for="max_price">Max Price:</label>
+                <input type="number" class="form-control" id="max_price" name="max_price">
+            </div>
+           
+            <button type="submit" class="btn btn-default">Filter</button>
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+  
+</div>
+
+</body>
+</html>
